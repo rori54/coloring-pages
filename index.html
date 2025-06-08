@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Шрифты - Коллекция</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            color: white;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            font-weight: 300;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .font-card {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            overflow: hidden;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .font-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.2);
+        }
+
+        .card-image {
+            width: 100%;
+            height: 200px;
+            background: #f8f9fa;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-image img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: cover;
+        }
+
+        .placeholder-text {
+            color: #6c757d;
+            font-size: 1.1em;
+            font-weight: 300;
+        }
+
+        .card-content {
+            padding: 20px;
+        }
+
+        .card-title {
+            font-size: 1.4em;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+
+        .card-description {
+            color: #7f8c8d;
+            font-size: 0.95em;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+
+        .download-link {
+            color: #667eea;
+            font-size: 1.1em;
+            font-weight: 600;
+            text-decoration: underline;
+            transition: all 0.3s ease;
+            display: inline-block;
+            margin-top: 5px;
+        }
+
+        .download-link:hover {
+            color: #764ba2;
+            text-decoration: none;
+        }
+
+        .load-more {
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .load-more-btn {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: 2px solid white;
+            padding: 15px 30px;
+            border-radius: 30px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .load-more-btn:hover {
+            background: white;
+            color: #667eea;
+        }
+
+        .loading {
+            text-align: center;
+            color: white;
+            font-size: 1.1em;
+            margin: 20px 0;
+        }
+
+        @media (max-width: 768px) {
+            .grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .header h1 {
+                font-size: 2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Премиум Шрифты</h1>
+            <p>Коллекция современных шрифтов для ваших проектов</p>
+        </div>
+
+        <div class="grid" id="fontGrid">
+            <!-- Карточки будут генерироваться здесь -->
+        </div>
+
+        <div class="loading" id="loading" style="display: none;">
+            Загрузка шрифтов...
+        </div>
+
+        <div class="load-more">
+            <button class="load-more-btn" onclick="loadMoreFonts()">Загрузить еще</button>
+        </div>
+    </div>
+
+    <script>
+        // Данные шрифтов с рабочими ссылками
+        const fontData = [
+            {
+                title: "Maddison Script",
+                description: "Элегантный рукописный шрифт с романтичным характером. Идеально подходит для свадебных приглашений и брендинга.",
+                image: "https://via.placeholder.com/300x200/667eea/ffffff?text=Maddison",
+                downloadUrl: "https://www.creativefabrica.com/subscriptions/graphics/coloring-pages-books/page/2002/"
+            },
+            {
+                title: "African American",
+                description: "Современный рукописный шрифт с выразительным стилем. Отлично подходит для логотипов и заголовков.",
+                image: "https://via.placeholder.com/300x200/764ba2/ffffff?text=African+American",
+                downloadUrl: "https://www.creativefabrica.com/subscriptions/graphics/coloring-pages-books/page/2002/"
+            },
+            {
+                title: "Family Quote Page",
+                description: "Вдохновляющие семейные цитаты для раскрашивания. Идеально подходит для семейного времяпрепровождения.",
+                image: "https://www.creativefabrica.com/wp-content/uploads/2023/04/06/Family-Quote-Coloring-Page-Graphics-66401210-1-580x435.jpg",
+                downloadUrl: "https://www.creativefabrica.com/subscriptions/graphics/coloring-pages-books/page/2002/"
+            },
+            {
+                title: "Mandala Coloring Page",
+                description: "Красивые мандалы для медитативного раскрашивания. Помогают расслабиться и сосредоточиться.",
+                image: "https://www.creativefabrica.com/wp-content/uploads/2023/03/01/Mandala-Coloring-Page-Graphics-62885297-1-580x387.jpg",
+                downloadUrl: "https://www.creativefabrica.com/subscriptions/graphics/coloring-pages-books/page/2002/"
+            },
+            {
+                title: "Vintage Serif",
+                description: "Классический шрифт с засечками в винтажном стиле. Подходит для книг и классического дизайна.",
+                image: "https://via.placeholder.com/300x200/f39c12/ffffff?text=Vintage+Serif",
+                downloadUrl: "https://example.com/vintage-serif-font"
+            },
+            {
+                title: "Brush Script",
+                description: "Динамичный кисточный шрифт с живым характером. Отлично для молодежного брендинга.",
+                image: "https://via.placeholder.com/300x200/9b59b6/ffffff?text=Brush+Script",
+                downloadUrl: "https://example.com/brush-script-font"
+            }
+        ];
+
+        let currentIndex = 0;
+        const itemsPerLoad = 3;
+
+        function createFontCard(font) {
+            return `
+                <div class="font-card">
+                    <div class="card-image">
+                        <img src="${font.image}" alt="${font.title}" onerror="this.style.display='none'; this.parentNode.innerHTML='<span class=placeholder-text>${font.title}</span>'">
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">${font.title}</h3>
+                        <p class="card-description">${font.description}</p>
+                        <a href="${font.downloadUrl}" target="_blank" class="download-link">
+                            Download coloring pages
+                        </a>
+                    </div>
+                </div>
+            `;
+        }
+
+        function loadMoreFonts() {
+            const loading = document.getElementById('loading');
+            const grid = document.getElementById('fontGrid');
+            
+            loading.style.display = 'block';
+            
+            setTimeout(() => {
+                const endIndex = Math.min(currentIndex + itemsPerLoad, fontData.length);
+                
+                for (let i = currentIndex; i < endIndex; i++) {
+                    grid.innerHTML += createFontCard(fontData[i]);
+                }
+                
+                currentIndex = endIndex;
+                loading.style.display = 'none';
+                
+                if (currentIndex >= fontData.length) {
+                    document.querySelector('.load-more').style.display = 'none';
+                }
+            }, 1000);
+        }
+
+        // Функция для добавления нового шрифта (для скрипта)
+        function addFont(title, description, imageUrl, downloadUrl) {
+            const newFont = {
+                title: title,
+                description: description,
+                image: imageUrl,
+                downloadUrl: downloadUrl
+            };
+            
+            fontData.push(newFont);
+            
+            // Добавляем карточку в сетку
+            const grid = document.getElementById('fontGrid');
+            grid.innerHTML += createFontCard(newFont);
+        }
+
+        // Функция для массового добавления шрифтов
+        function addFonts(fonts) {
+            fonts.forEach(font => {
+                addFont(font.title, font.description, font.image, font.downloadUrl);
+            });
+        }
+
+        // Загружаем первые шрифты при загрузке страницы
+        window.onload = function() {
+            loadMoreFonts();
+        };
+
+        // API для внешних скриптов
+        window.FontManager = {
+            addFont: addFont,
+            addFonts: addFonts,
+            getFonts: () => fontData
+        };
+    </script>
+</body>
+</html>
