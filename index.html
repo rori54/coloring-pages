@@ -102,19 +102,27 @@
             margin-bottom: 20px;
         }
 
-        .download-link {
-            color: #667eea;
-            font-size: 1.1em;
+        .download-btn {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-size: 0.9em;
             font-weight: 600;
-            text-decoration: underline;
+            cursor: pointer;
             transition: all 0.3s ease;
+            width: 100%;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-decoration: none;
             display: inline-block;
-            margin-top: 5px;
+            text-align: center;
         }
 
-        .download-link:hover {
-            color: #764ba2;
-            text-decoration: none;
+        .download-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
         }
 
         .load-more {
@@ -193,16 +201,16 @@
                 downloadUrl: "https://www.creativefabrica.com/subscriptions/graphics/coloring-pages-books/page/2002/"
             },
             {
-                title: "Family Quote Page",
-                description: "Вдохновляющие семейные цитаты для раскрашивания. Идеально подходит для семейного времяпрепровождения.",
-                image: "https://www.creativefabrica.com/wp-content/uploads/2023/04/06/Family-Quote-Coloring-Page-Graphics-66401210-1-580x435.jpg",
-                downloadUrl: "https://www.creativefabrica.com/subscriptions/graphics/coloring-pages-books/page/2002/"
+                title: "Retro Groovy",
+                description: "Яркий ретро-шрифт в стиле 70-х годов. Идеален для постеров и креативных проектов.",
+                image: "https://via.placeholder.com/300x200/e74c3c/ffffff?text=Retro+Groovy",
+                downloadUrl: "https://example.com/retro-groovy-font"
             },
             {
-                title: "Mandala Coloring Page",
-                description: "Красивые мандалы для медитативного раскрашивания. Помогают расслабиться и сосредоточиться.",
-                image: "https://www.creativefabrica.com/wp-content/uploads/2023/03/01/Mandala-Coloring-Page-Graphics-62885297-1-580x387.jpg",
-                downloadUrl: "https://www.creativefabrica.com/subscriptions/graphics/coloring-pages-books/page/2002/"
+                title: "Modern Sans",
+                description: "Чистый и минималистичный шрифт без засечек. Универсальное решение для веб-дизайна.",
+                image: "https://via.placeholder.com/300x200/2ecc71/ffffff?text=Modern+Sans",
+                downloadUrl: "https://example.com/modern-sans-font"
             },
             {
                 title: "Vintage Serif",
@@ -230,8 +238,8 @@
                     <div class="card-content">
                         <h3 class="card-title">${font.title}</h3>
                         <p class="card-description">${font.description}</p>
-                        <a href="${font.downloadUrl}" target="_blank" class="download-link">
-                            Download coloring pages
+                        <a href="${font.downloadUrl}" target="_blank" class="download-btn">
+                            Скачать шрифт
                         </a>
                     </div>
                 </div>
